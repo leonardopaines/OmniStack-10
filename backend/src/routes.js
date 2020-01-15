@@ -5,6 +5,10 @@ const SearchController = require('./controllers/SearchController');
 
 const routes = Router();
 
+routes.get('/', (request, response) => {
+    return response.json({ message: "Serviço OK" });
+});
+
 routes.get('/devs', DevController.index);
 routes.post('/devs', DevController.store);
 

@@ -1,10 +1,11 @@
 const axios = require('axios');
-const Dev = require('../models/dev');
+const Dev = require('../models/Dev');
+const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
     async index(request, response) {
-        var devResponse = await Dev.find();
-        return response.json(devResponse);
+        var devs = await Dev.find();
+        return response.json(devs);
     },
 
     async store(request, response) {
@@ -15,7 +16,6 @@ module.exports = {
             const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
 
             const { name = login, avatar_url, bio } = apiResponse.data;
-            const techsArray = techs.split(',').map(tech => tech.trim());
 
             const location = {
                 type: 'Point',
@@ -26,10 +26,18 @@ module.exports = {
                 name,
                 avatar_url,
                 bio,
-                techs: techsArray,
+                techs: parseStringAsArray(techs),
                 location
             });
         }
         return response.json(dev);
+    },
+
+    async update() {
+
+    },
+
+    async destroy() {
+
     }
 };
