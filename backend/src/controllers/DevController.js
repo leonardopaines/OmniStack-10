@@ -23,6 +23,7 @@ module.exports = {
             };
 
             dev = await Dev.create({
+                github_username,
                 name,
                 avatar_url,
                 bio,
