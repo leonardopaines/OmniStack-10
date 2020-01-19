@@ -4,3 +4,4 @@
 
 /.vs
 /backend/node_modules
+/mobile/.expo-shared
